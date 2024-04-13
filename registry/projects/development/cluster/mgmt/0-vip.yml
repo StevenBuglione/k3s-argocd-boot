@@ -20,5 +20,10 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    ignoreDifferences:
+      - group: apps
+        kind: DaemonSet
+        jsonPointers:
+          - /status
     syncOptions:
       - CreateNamespace=true
