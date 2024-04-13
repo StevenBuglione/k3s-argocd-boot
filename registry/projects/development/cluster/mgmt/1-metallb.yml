@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
     path: registry/projects/development/cluster/mgmt/metallb-config
-    targetRevision: HEAD
+    targetRevision: develop
   destination:
     name: in-cluster
     namespace: metallb-system

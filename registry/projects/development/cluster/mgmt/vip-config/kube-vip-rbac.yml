@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://kube-vip.io
     path: manifests/rbac.yaml
-    targetRevision: HEAD
+    targetRevision: develop
   destination:
     name: in-cluster
     namespace: kube-system
