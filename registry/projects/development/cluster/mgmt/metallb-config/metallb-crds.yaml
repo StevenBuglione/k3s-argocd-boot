@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/metallb/metallb
-    path: metallb/config/manifests/metallb-native.yaml
+    path: config/manifests/metallb-native.yaml
     targetRevision: v0.13.9
   destination:
     name: in-cluster
