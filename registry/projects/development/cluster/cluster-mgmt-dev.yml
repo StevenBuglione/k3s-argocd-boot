@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-k3s-argocd-boot-mgmt-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: default
+    name: in-cluster
+  project: k3s-argocd-boot-project-dev
+  source:
+    path: registry/projects/development/cluster/mgmt
+    repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
+    targetRevision: HEAD
