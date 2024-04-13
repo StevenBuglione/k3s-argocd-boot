@@ -1,16 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metallb-crds.yaml
+  name: metallb-native
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://github.com/metallb/metallb
     path: config/manifests/metallb-native.yaml
-    targetRevision: v0.13.9
+    targetRevision: v0.14.4
   destination:
     name: in-cluster
     namespace: metallb-system
@@ -18,5 +16,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  syncOptions:
+    - CreateNamespace=true
