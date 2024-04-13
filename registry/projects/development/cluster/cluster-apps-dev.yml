@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-k3s-argocd-boot-apps-dev
+  name: apps-dev
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
