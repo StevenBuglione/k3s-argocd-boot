@@ -14,3 +14,7 @@ spec:
     path: registry/projects/development/cluster/apps
     repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
     targetRevision: develop
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

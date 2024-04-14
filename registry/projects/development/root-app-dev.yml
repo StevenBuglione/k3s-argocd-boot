@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-k3s-argocd-boot-app-dev
+  name: app-bundle-dev
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,8 +9,12 @@ spec:
   destination:
     namespace: default
     name: in-cluster
-  project: k3s-argocd-boot-project-dev
+  project: development
   source:
     path: registry/projects/development/cluster
     repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
     targetRevision: develop
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
