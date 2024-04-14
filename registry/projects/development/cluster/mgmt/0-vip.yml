@@ -24,7 +24,7 @@ spec:
   source:
     repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
     path: registry/projects/development/cluster/mgmt/vip-config
-    targetRevision: develop
+    targetRevision: HEAD
   destination:
     name: in-cluster
     namespace: kube-system
