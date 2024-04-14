@@ -8,7 +8,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '1'
 spec:
-  project: default
+  project: development
   source:
     repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
     path: registry/projects/development/cluster/mgmt/metallb-config
