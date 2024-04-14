@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: default
     name: in-cluster
-  project: k3s-argocd-boot-project-dev
+  project: development
   source:
     path: registry/projects/development/cluster/mgmt
     repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
