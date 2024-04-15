@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd  # This is the namespace where Argo CD is installed
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.jetstack.io'  # Helm repo URL for jetstack
+    targetRevision: v1.9.1  # Version of the cert-manager chart
+    chart: cert-manager  # Name of the chart
+    helm:
+      values: |
+        installCRDs: false
+        replicaCount: 3
+        extraArgs:
+          - --dns01-recursive-nameservers=1.1.1.1:53,9.9.9.9:53
+          - --dns01-recursive-nameservers-only
+        podDnsPolicy: None
+        podDnsConfig:
+          nameservers:
+            - 1.1.1.1
+            - 9.9.9.9
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
