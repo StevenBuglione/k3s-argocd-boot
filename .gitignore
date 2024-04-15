@@ -1,3 +1,4 @@
 /.idea/
 .idea/
 /k3s-argocd-boot.iml
+*.json
