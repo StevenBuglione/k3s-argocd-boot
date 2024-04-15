@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-crds
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
+    path: registry/projects/development/cluster/mgmt/cert-manager-config/cert-manager-crds
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
