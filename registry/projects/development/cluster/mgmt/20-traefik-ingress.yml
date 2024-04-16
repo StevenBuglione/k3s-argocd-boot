@@ -68,7 +68,7 @@ spec:
           loadBalancerSourceRanges: []
           externalIPs: []
   destination:
-    server: in-cluster
+    server: 'https://kubernetes.default.svc'
     namespace: traefik
   syncPolicy:
     automated:

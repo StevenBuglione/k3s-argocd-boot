@@ -26,7 +26,7 @@ spec:
             - 1.1.1.1
             - 9.9.9.9
   destination:
-    server: in-cluster
+    server: 'https://kubernetes.default.svc'
     namespace: cert-manager
   syncPolicy:
     automated:
