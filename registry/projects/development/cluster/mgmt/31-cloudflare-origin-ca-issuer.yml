@@ -4,7 +4,7 @@ metadata:
   name: cloudflare-cloudflare-origin-ca-issuer
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: '5'
+    argocd.argoproj.io/sync-wave: '31'
 spec:
   project: development
   source:

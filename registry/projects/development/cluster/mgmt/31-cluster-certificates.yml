@@ -1,22 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mgmt-dev
+  name: cert-issuers
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: '0'
+    argocd.argoproj.io/sync-wave: '31'
 spec:
-  destination:
-    namespace: default
-    name: in-cluster
   project: development
   source:
-    path: registry/projects/development/cluster/mgmt
     repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
+    path: registry/projects/development/clusters/certificates
     targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

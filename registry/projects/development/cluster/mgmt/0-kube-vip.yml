@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vip-config
+  name: kube-vip
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -23,7 +23,7 @@ spec:
         - /status/updatedNumberScheduled
   source:
     repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
-    path: registry/projects/development/cluster/mgmt/vip-config
+    path: registry/projects/development/cluster/mgmt/kube-vip
     targetRevision: HEAD
   destination:
     name: in-cluster
