@@ -18,7 +18,7 @@ spec:
         globalArguments:
           - "--global.sendanonymoususage=false"
           - "--global.checknewversion=false"
-          - "--providers.kubernetesingress.ingressendpoint.ip=192.168.1.31"
+          - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
 
         additionalArguments:
           - "--serversTransport.insecureSkipVerify=true"
