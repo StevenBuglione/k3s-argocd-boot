@@ -18,11 +18,11 @@ spec:
         globalArguments:
           - "--global.sendanonymoususage=false"
           - "--global.checknewversion=false"
-        
+
         additionalArguments:
           - "--serversTransport.insecureSkipVerify=true"
           - "--log.level=INFO"
-        
+
         deployment:
           enabled: true
           replicas: 3
@@ -30,7 +30,7 @@ spec:
           podAnnotations: {}
           additionalContainers: []
           initContainers: []
-        
+
         ports:
           web:
             redirectTo:
@@ -39,11 +39,11 @@ spec:
           websecure:
             tls:
               enabled: true
-        
+
         ingressRoute:
           dashboard:
             enabled: false
-        
+
         providers:
           kubernetesCRD:
             enabled: true
@@ -54,14 +54,15 @@ spec:
             allowExternalNameServices: true
             publishedService:
               enabled: false
-        
+
         rbac:
           enabled: true
-        
+
         service:
           enabled: true
           type: LoadBalancer
-          annotations: {}
+          annotations:
+            service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
           labels: {}
           spec:
             loadBalancerIP: 192.168.1.32 # this should be an IP in the MetalLB range
