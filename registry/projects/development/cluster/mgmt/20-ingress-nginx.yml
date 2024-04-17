@@ -16,7 +16,7 @@ spec:
     helm:
       values: |
         additionalArguments:
-          - "--providers.kubernetesingress.ingressendpoint.publishedservice=networking/traefik"
+          - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
           - "--experimental.plugins.theme-park.modulename=github.com/packruler/traefik-themepark"
           - "--experimental.plugins.theme-park.version=v1.2.2"
           - "--serverstransport.insecureskipverify=true"
