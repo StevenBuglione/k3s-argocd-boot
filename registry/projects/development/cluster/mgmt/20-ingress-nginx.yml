@@ -1,20 +1,74 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: traefik
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: '20'
 spec:
-  destination:
-    namespace: ingress-nginx
-    server: https://kubernetes.default.svc
-  project: default
+  project: development
   source:
-    repoURL: https://kubernetes.github.io/ingress-nginx
-    chart: ingress-nginx
-    targetRevision: 4.9.1
+    repoURL: 'https://helm.traefik.io/traefik'
+    targetRevision: v27.0.2
+    chart: traefik
+    helm:
+      values: |
+        globalArguments:
+          - "--global.sendanonymoususage=false"
+          - "--global.checknewversion=false"
+
+        additionalArguments:
+          - "--serversTransport.insecureSkipVerify=true"
+          - "--log.level=INFO"
+        deployment:
+          enabled: true
+          replicas: 3
+          annotations: {}
+          podAnnotations: {}
+          additionalContainers: []
+          initContainers: []
+
+        ports:
+          web:
+            redirectTo:
+              port: websecure
+              priority: 10
+          websecure:
+            tls:
+              enabled: true
+
+        ingressRoute:
+          dashboard:
+            enabled: false
+
+        kubernetes:
+          ingressEndpoint:
+            useDefaultPublishedService: true
+        providers:
+          kubernetesIngress:
+            publishedService:
+              enabled: true
+
+        rbac:
+          enabled: true
+
+        service:
+          enabled: true
+          type: LoadBalancer
+          labels: {}
+          spec:
+            loadBalancerIP: 192.168.1.32 # this should be an IP in the MetalLB range
+          loadBalancerSourceRanges: []
+          externalIPs: []
+
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: traefik
   syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
     syncOptions:
       - CreateNamespace=true
-    automated:
-      prune: true
-      selfHeal: true
