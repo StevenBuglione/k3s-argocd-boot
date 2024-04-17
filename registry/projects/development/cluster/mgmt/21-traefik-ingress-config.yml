@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-middleware
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: '21'
+spec:
+  project: development
+  source:
+    repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
+    path: registry/projects/development/cluster/mgmt/traefik-middleware
+    targetRevision: HEAD
+  destination:
+    name: in-cluster
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
