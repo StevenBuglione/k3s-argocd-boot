@@ -18,6 +18,7 @@ spec:
         globalArguments:
           - "--global.sendanonymoususage=false"
           - "--global.checknewversion=false"
+          - "--providers.kubernetesingress.ingressendpoint.ip=192.168.1.31"
 
         additionalArguments:
           - "--serversTransport.insecureSkipVerify=true"
