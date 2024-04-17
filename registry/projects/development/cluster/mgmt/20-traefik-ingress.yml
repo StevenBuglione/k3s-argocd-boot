@@ -18,11 +18,11 @@ spec:
         globalArguments:
           - "--global.sendanonymoususage=false"
           - "--global.checknewversion=false"
-          - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
-
+        
         additionalArguments:
           - "--serversTransport.insecureSkipVerify=true"
           - "--log.level=INFO"
+        
         deployment:
           enabled: true
           replicas: 3
@@ -30,7 +30,7 @@ spec:
           podAnnotations: {}
           additionalContainers: []
           initContainers: []
-
+        
         ports:
           web:
             redirectTo:
@@ -39,45 +39,37 @@ spec:
           websecure:
             tls:
               enabled: true
-
+        
         ingressRoute:
           dashboard:
             enabled: false
-
+        
         providers:
           kubernetesCRD:
             enabled: true
             ingressClass: traefik-external
             allowExternalNameServices: true
           kubernetesIngress:
-            kubernetesIngress:
-              publishedService:
-                enabled: true
-
+            enabled: true
+            allowExternalNameServices: true
+            publishedService:
+              enabled: false
+        
         rbac:
           enabled: true
-
+        
         service:
           enabled: true
           type: LoadBalancer
+          annotations: {}
           labels: {}
           spec:
             loadBalancerIP: 192.168.1.32 # this should be an IP in the MetalLB range
           loadBalancerSourceRanges: []
           externalIPs: []
           status:
-            loadBalancer: {}
-        
-        configs:
-          cm:
-            resource.customizations: |
-              networking.k8s.io/Ingress:
-                health.lua: |
-                  hs = {}
-                  hs.status = "Healthy"
-                  hs.message = "Probably just fine"
-                  return hs
-
+            loadBalancer:
+              ingress: [192.168.1.32]
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: traefik
