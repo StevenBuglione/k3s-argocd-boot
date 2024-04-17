@@ -28,7 +28,7 @@ spec:
             enable-ssl-passthrough: true
     chart: ingress-nginx
   destination:
-    name: 'https://kubernetes.default.svc'
+    name: in-cluster
     namespace: ingress-nginx
   syncPolicy:
     automated:
