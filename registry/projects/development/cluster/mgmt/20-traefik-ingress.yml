@@ -52,8 +52,7 @@ spec:
           kubernetesIngress:
             enabled: true
             allowExternalNameServices: true
-            publishedService:
-              enabled: true
+            publishedService: "traefik/traefik
         
         rbac:
           enabled: true
