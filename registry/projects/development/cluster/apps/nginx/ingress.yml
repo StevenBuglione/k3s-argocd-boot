@@ -22,5 +22,5 @@ spec:
           port: 80
       middlewares:
         - name: default-headers
-  tls:
-    secretName: local-klustered-us-staging-tls
+#  tls:
+#    secretName: local-klustered-us-staging-tls
