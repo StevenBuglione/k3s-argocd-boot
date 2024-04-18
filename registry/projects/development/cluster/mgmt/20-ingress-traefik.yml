@@ -10,15 +10,69 @@ metadata:
 spec:
   project: development
   source:
-    repoURL: https://github.com/StevenBuglione/k3s-argocd-boot
-    path: registry/projects/development/cluster/mgmt/traefik
-    targetRevision: HEAD
+    repoURL: 'https://helm.traefik.io/traefik'
+    targetRevision: v27.0.2
+    chart: traefik
+    helm:
+      values: |
+        globalArguments:
+          - "--global.sendanonymoususage=false"
+          - "--global.checknewversion=false"
+
+        additionalArguments:
+          - "--serversTransport.insecureSkipVerify=true"
+          - "--log.level=INFO"
+        deployment:
+          enabled: true
+          replicas: 3
+          annotations: {}
+          podAnnotations: {}
+          additionalContainers: []
+          initContainers: []
+
+        ports:
+          web:
+            redirectTo:
+              port: websecure
+              priority: 10
+          websecure:
+            tls:
+              enabled: true
+
+        ingressRoute:
+          dashboard:
+            enabled: false
+
+        providers:
+          kubernetesCRD:
+            enabled: true
+            ingressClass: traefik-external
+            allowExternalNameServices: true
+          kubernetesIngress:
+            enabled: true
+            allowExternalNameServices: true
+            publishedService:
+              enabled: false
+
+        rbac:
+          enabled: true
+
+        service:
+          enabled: true
+          type: LoadBalancer
+          annotations:
+            service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+          labels: {}
+          spec:
+            loadBalancerIP: 192.168.1.32 # this should be an IP in the MetalLB range
+          loadBalancerSourceRanges: []
+          externalIPs: []
   destination:
-    name: in-cluster
+    server: 'https://kubernetes.default.svc'
     namespace: traefik
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
+      prune: true
     syncOptions:
       - CreateNamespace=true
