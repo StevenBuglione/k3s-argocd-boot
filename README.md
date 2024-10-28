@@ -53,3 +53,11 @@ Replace `test-secret` with the name of your secret and `key1` with the key of th
 2. The command will output the decoded value of the secret data.
 
 **Note:** Be careful with your secrets. Anyone with access to your Kubernetes cluster can potentially retrieve and decode your secrets.
+
+
+1 Password config:
+kubectl create secret generic op-credentials \
+--from-file=1password-credentials.json=1password-credentials.json \
+-n default
+
+kubectl create secret generic <token-name> --from-literal=token=<OP_CONNECT_TOKEN> --namespace=<namespace>
