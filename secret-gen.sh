@@ -8,7 +8,7 @@ SEALED_SECRET_OUTPUT=sealed-$SECRET_NAME.yaml
 
 # Define your secret data as an associative array
 declare -A SECRET_DATA=(
-    [""]=""
+    ["cloudflare-token"]=""
     # Add more key-value pairs as needed
 )
 
