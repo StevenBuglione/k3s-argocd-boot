@@ -61,3 +61,4 @@ kubectl create secret generic op-credentials \
 -n default
 
 kubectl create secret generic <token-name> --from-literal=token=<OP_CONNECT_TOKEN> --namespace=<namespace>
+[]()
