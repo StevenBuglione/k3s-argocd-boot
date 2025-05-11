@@ -31,7 +31,7 @@ spec:
             - name: port
               value: "6443"
             - name: vip_cidr
-              value: "10.10.10.30/24"
+              value: "10.10.10.50/24"
             - name: cp_enable
               value: "true"
             - name: cp_namespace
@@ -49,7 +49,7 @@ spec:
             - name: vip_retryperiod
               value: "2"
             - name: address
-              value: "10.10.10.30"
+              value: "10.10.10.50"
           image: ghcr.io/kube-vip/kube-vip:main
           imagePullPolicy: Always
           name: kube-vip
