@@ -23,13 +23,6 @@ spec:
         ingressRoute:
           dashboard:
             enabled: true
-        ports:
-          web:
-            redirections:
-              entryPoint:
-                to: websecure
-                scheme: https
-                permanent: true
 
   # -------------------------------------------------
   destination:
