@@ -20,31 +20,17 @@ spec:
     helm:
       ## Everything under this block ends up in values.yaml
       values: |
-        # 1) make Traefik a LoadBalancer serviced by MetalLB
-        service:
-          type: LoadBalancer
-          loadBalancerIP: 10.10.10.30                      # ← pick a free address in the pool
-
-        # 2) expose the traefik entry‑point on port 9000
-        ports:
-          traefik:
-            port: 9000            # container port
-            expose: true
-            exposedPort: 9000     # service port
-            protocol: TCP
-
-        # 3) enable API + dashboard (served on the traefik entry‑point)
-        additionalArguments:
-          - "--api.insecure=true"   # enables both /api and /dashboard
-          # - "--api.dashboard=true"  # (optional, explicit flag)
-
-        # 4) optional – expose the dashboard over HTTP 80/443 too
         ingressRoute:
           dashboard:
             enabled: true
-            entryPoints: ["web","websecure"]  # serve UI on 80/443 as well
-            # matchRule defaults to PathPrefix(`/dashboard`) || PathPrefix(`/api`)
-            # tls options can be added here if you use cert‑manager
+        ports:
+        web:
+          redirections:
+            entryPoint:
+              to: websecure
+              scheme: https
+              permanent: true
+
   # -------------------------------------------------
   destination:
     name: in-cluster
