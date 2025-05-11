@@ -24,12 +24,12 @@ spec:
           dashboard:
             enabled: true
         ports:
-        web:
-          redirections:
-            entryPoint:
-              to: websecure
-              scheme: https
-              permanent: true
+          web:
+            redirections:
+              entryPoint:
+                to: websecure
+                scheme: https
+                permanent: true
 
   # -------------------------------------------------
   destination:
