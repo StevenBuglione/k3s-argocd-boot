@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 1password
+  name: traefik
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: https://traefik.github.io/charts
-    chart: connect
+    chart: traefik
     targetRevision: 35.2.0
   destination:
     name: in-cluster
