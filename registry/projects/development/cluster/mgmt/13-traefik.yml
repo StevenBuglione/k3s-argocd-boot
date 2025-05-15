@@ -29,6 +29,23 @@ spec:
             # Add custom middlewares : authentication and redirection
             middlewares:
               - name: traefik-dashboard-auth
+        extraObjects:
+          - apiVersion: v1
+            kind: Secret
+            metadata:
+              name: traefik-dashboard-auth-secret
+            type: kubernetes.io/basic-auth
+            stringData:
+              username: admin
+              password: changeme
+
+          - apiVersion: traefik.io/v1alpha1
+            kind: Middleware
+            metadata:
+              name: traefik-dashboard-auth
+            spec:
+              basicAuth:
+                secret: traefik-dashboard-auth-secret
 
   # -------------------------------------------------
   destination:
