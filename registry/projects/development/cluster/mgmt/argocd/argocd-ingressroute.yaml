@@ -4,12 +4,13 @@ metadata:
   name: argocd-dashboard
   namespace: argocd
 spec:
+  entryPoints:
+    - web  # Note: not websecure
   routes:
     - match: Host(`argocd.klustered.us`)
       kind: Rule
       services:
         - name: argocd-server
-          port: 443
-          scheme: https
-  tls:
-    passthrough: true
+          port: 80
+          scheme: http
+
