@@ -10,21 +10,44 @@ metadata:
 spec:
   project: default
 
-  # -------------------------------------------------
-  # Helm chart source
-  # -------------------------------------------------
   source:
     repoURL: https://traefik.github.io/charts
     chart: traefik
     targetRevision: 35.2.0
     helm:
-      ## Everything under this block ends up in values.yaml
       values: |
         ingressRoute:
           dashboard:
             enabled: true
 
-  # -------------------------------------------------
+        ports:
+          web:
+            expose: true
+            exposedPort: 80
+            protocol: TCP
+
+        service:
+          enabled: true
+          type: LoadBalancer
+
+        # Middleware, router, and entrypoint for the dashboard
+        additionalArguments:
+          - "--entrypoints.web.address=:80"
+          - "--api.dashboard=true"
+
+        # Custom IngressRoute for dashboard
+        dashboards:
+          enabled: true
+
+        ingressRoute:
+          dashboard:
+            enabled: true
+            annotations:
+              kubernetes.io/ingress.class: traefik
+            matchRule: Host(`traefik.klustered.us`)
+            entryPoints:
+              - web
+
   destination:
     name: in-cluster
     namespace: traefik-v3
