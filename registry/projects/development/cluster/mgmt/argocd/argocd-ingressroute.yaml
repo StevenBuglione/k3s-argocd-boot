@@ -12,8 +12,4 @@ spec:
           port: 443
           scheme: https
   tls:
-    # Uncomment this if you have a certResolver configured in Traefik
-    # certResolver: letsencrypt
-    # OR use a TLS secret if pre-provisioned:
-    # secretName: your-tls-secret
-    passthrough: true  # Because ArgoCD handles its own TLS
+    passthrough: true
