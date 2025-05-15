@@ -1,0 +1,21 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-dashboard
+  namespace: argocd
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`argocd.klustered.us`)
+      kind: Rule
+      services:
+        - name: argocd-server
+          port: 443
+          scheme: https
+  tls:
+    # Uncomment this if you have a certResolver configured in Traefik
+    # certResolver: letsencrypt
+    # OR use a TLS secret if pre-provisioned:
+    # secretName: your-tls-secret
+    passthrough: true  # Because ArgoCD handles its own TLS
