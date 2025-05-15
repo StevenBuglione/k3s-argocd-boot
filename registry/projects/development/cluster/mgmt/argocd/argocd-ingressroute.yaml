@@ -5,12 +5,12 @@ metadata:
   namespace: argocd
 spec:
   entryPoints:
-    - web  # Note: not websecure
+    - web  # For HTTP traffic
   routes:
     - match: Host(`argocd.klustered.us`)
       kind: Rule
       services:
         - name: argocd-server
-          port: 80
+          port: 8080  # Use 8080 because that's the port the service is targeting
           scheme: http
 
