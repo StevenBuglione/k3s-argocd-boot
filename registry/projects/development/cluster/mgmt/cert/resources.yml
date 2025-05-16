@@ -2,6 +2,7 @@ apiVersion: onepassword.com/v1
 kind: OnePasswordItem
 metadata:
   name: cloudflare-api-token-secret
+  namespace: cert-manager
 spec:
   itemPath: "vaults/a4nh24gpadwwnvcqnww3txokwy/items/alaa2qrq5geu637sjc3trpdeqm"
 ---
