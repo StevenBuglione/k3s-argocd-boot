@@ -29,6 +29,12 @@ spec:
             # Add custom middlewares : authentication and redirection
             middlewares:
               - name: traefik-dashboard-auth
+        tls:
+        stores:
+          default:
+            defaultCertificate:
+              secretName: wildcard-klustered-us-tls
+              secretNamespace: cert-manager
         extraObjects:
           - apiVersion: v1
             kind: Secret
