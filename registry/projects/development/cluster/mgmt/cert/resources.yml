@@ -4,7 +4,7 @@ metadata:
   name: cloudflare-api-token-secret
   namespace: traefik-v3
 spec:
-  itemPath: "vaults/a4nh24gpadwwnvcqnww3txokwy/items/alaa2qrq5geu637sjc3trpdeqm"
+  itemPath: "vaults/fekk46izlezqrgocthhcn4xwp4/items/uoehc7luujcnyehrqz5enroisi"
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
